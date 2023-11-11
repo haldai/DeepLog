@@ -86,9 +86,10 @@ find_min_len(Pos,Neg,MaxDepth,Lo,Hi,Subs1,Subs2,MinDepth) :-
 	Mid is 1+Lo+(Hi-Lo)//2,
 	find_min_len(Pos,Neg,MaxDepth,Mid,Hi,Subs1,Subs2,MinDepth), !.
 
-proves(_,T0,_,_,_,_,_,_) :-
-	maxtime(Tmax), T1 is cputime-T0,
-	T1>=Tmax, !, fail.
+%% DEBUG: no time limit
+%% proves(_,T0,_,_,_,_,_,_) :-
+%% 	maxtime(Tmax), T1 is cputime-T0,
+%% 	T1>=Tmax, !, fail.
 proves([],_,Subs1,Subs2,_,_,I1,I2) :- reverse(Subs1,Subs2), reverse(I1,I2).
 proves([Pos|T],T0,Subs1,Subs2,MaxLen,MaxDepth,I1,I2) :-
 	Pos=..[P,X,Y],
@@ -99,9 +100,10 @@ proves([Pos|T],T0,Subs1,Subs2,MaxLen,MaxDepth,I1,I2) :-
 	prove_d1(P,X,Y,T0,Subs1,Subs3,I3,I4,MaxLen,MaxDepth,MinDepth),
 	proves(T,T0,Subs3,Subs2,MaxLen,MaxDepth,I4,I2).
 
-nproves(_,T0,_,_,_) :-
-	maxtime(Tmax), T1 is cputime-T0,
-	T1>=Tmax, !, fail.
+%% DEBUG: no time limit
+%% nproves(_,T0,_,_,_) :-
+%% 	maxtime(Tmax), T1 is cputime-T0,
+%% 	T1>=Tmax, !, fail.
 nproves([],_,_,_,_).
 nproves([Neg|T],T0,Subs,I,MaxDepth) :-
 	Neg=..[P,X,Y],
